@@ -2,10 +2,11 @@ const PAINTING_WIDTH = 1200;
 
 let c = document.createElement("canvas");
 let img1 = new Image();
-img1.src = document.getElementById("painting").src;
+img1.src = "./gogh_wheat_cypresses.jpeg";
+// img1.src = "./sieun.jpeg";
 
 img1.onload = function () {
-  document.getElementById("painting").remove();
+  // document.getElementById("painting").remove();
 
   w = img1.width;
   h = img1.height;
@@ -18,14 +19,15 @@ img1.onload = function () {
   let pixelArr = ctx.getImageData(0, 0, w, h).data;
   // console.log(pixelArr);
   // 40 pixels
-  let sample_size = 50;
+  let sample_size = 40;
 
   for (let y = 0; y < h; y += sample_size) {
     for (let x = 0; x < w; x += sample_size) {
       let p = (x + y * w) * 4;
       // console.log(p);
       ctx.beginPath();
-      ctx.fillStyle = "#000";
+      // ctx.fillStyle = "#fff";
+      ctx.fillStyle = "#212121";
       // ctx.fillStyle =
       //   "rgba(" +
       //   pixelArr[p] +
@@ -55,13 +57,14 @@ img1.onload = function () {
         "," +
         pixelArr[p + 3] +
         ")";
-      ctx.arc(x, y, sample_size / 2, 0, 2 * Math.PI, false);
+      ctx.arc(x, y, sample_size / 3, 0, 2 * Math.PI, false);
       ctx.fill();
     }
   }
   let img2 = new Image();
-  img2.id = "ldsjfa";
+  img2.id = "painting";
   img2.src = c.toDataURL();
-  img2.width = PAINTING_WIDTH;
-  document.body.appendChild(img2);
+  // img2.width = PAINTING_WIDTH;
+  let htmlContainer = document.getElementById("paintingContainer");
+  htmlContainer.appendChild(img2);
 };
